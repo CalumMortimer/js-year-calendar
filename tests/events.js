@@ -28,13 +28,13 @@ const testDayEvent = (eventName, eventToTrigger) => {
         dataSource: [
             {
                 name: "test1",
-                startDate: new Date(currentYear, 6, 10),
-                endDate: new Date(currentYear, 6, 20)
+                startDate: correctLocaleDate(new Date(currentYear, 6, 10)),
+                endDate: correctLocaleDate(new Date(currentYear, 6, 20))
             },
             {
                 name: "test2",
-                startDate: new Date(currentYear, 7, 10),
-                endDate: new Date(currentYear, 7, 20)
+                startDate: correctLocaleDate(new Date(currentYear, 7, 10)),
+                endDate: correctLocaleDate(new Date(currentYear, 7, 20))
             }
         ]
     });
@@ -42,15 +42,20 @@ const testDayEvent = (eventName, eventToTrigger) => {
     let dayElt = getDay(6, 8);
     dayElt.id = "test1";
     triggerEvent(dayElt, eventToTrigger);
-    expect(eventInit).toHaveNthReturnedWith(1, { calendar, date: new Date(currentYear, 6, 8), eltId: "test1", events: [] });
-    expect(eventAdded).toHaveNthReturnedWith(1, { calendar,date: new Date(currentYear, 6, 8), eltId: "test1", events: [] });
+    expect(eventInit).toHaveNthReturnedWith(1, { calendar, date: correctLocaleDate(new Date(currentYear, 6, 8)), eltId: "test1", events: [] });
+    expect(eventAdded).toHaveNthReturnedWith(1, { calendar,date: correctLocaleDate(new Date(currentYear, 6, 8)), eltId: "test1", events: [] });
 
     dayElt = getDay(6, 12);
     dayElt.id = "test2";
     triggerEvent(dayElt, eventToTrigger);
-    expect(eventInit).toHaveNthReturnedWith(2, { calendar, date: new Date(currentYear, 6, 12), eltId: "test2", events: ['test1'] });
-    expect(eventAdded).toHaveNthReturnedWith(2, { calendar, date: new Date(currentYear, 6, 12), eltId: "test2", events: ['test1'] });
+    expect(eventInit).toHaveNthReturnedWith(2, { calendar, date: correctLocaleDate(new Date(currentYear, 6, 12)), eltId: "test2", events: ['test1'] });
+    expect(eventAdded).toHaveNthReturnedWith(2, { calendar, date: correctLocaleDate(new Date(currentYear, 6, 12)), eltId: "test2", events: ['test1'] });
 };
+
+const correctLocaleDate = (date) => {
+    date.setTime( date.getTime() - date.getTimezoneOffset()*60*1000 );
+    return date;
+}
 
 test('click day event', () => {
     testDayEvent('clickDay', 'click');
@@ -100,8 +105,8 @@ test('select range event', () => {
     triggerEvent(getDay(9, 20), "mouseenter");
     triggerEvent(getDay(9, 20), "mouseup");
 
-    expect(selectRangeInit).toHaveNthReturnedWith(1, { calendar, startDate: new Date(currentYear, 8, 10), endDate: new Date(currentYear, 9, 20) });
-    expect(selectRangeAdded).toHaveNthReturnedWith(1, { calendar, startDate: new Date(currentYear, 8, 10), endDate: new Date(currentYear, 9, 20) });
+    expect(selectRangeInit).toHaveNthReturnedWith(1, { calendar, startDate: correctLocaleDate(new Date(currentYear, 8, 10)), endDate: correctLocaleDate(new Date(currentYear, 9, 20)) });
+    expect(selectRangeAdded).toHaveNthReturnedWith(1, { calendar, startDate: correctLocaleDate(new Date(currentYear, 8, 10)), endDate: correctLocaleDate(new Date(currentYear, 9, 20)) });
 });
 
 test('year changed event', () => {

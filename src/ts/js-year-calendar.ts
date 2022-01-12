@@ -146,7 +146,7 @@ export default class Calendar<T extends CalendarDataSourceElement> {
 	 * ```
 	 */
 	public renderEnd: CalendarRenderEndEventObject;
-	
+
 	/**
 	 * Fired when a date range is selected.
 	 * 
@@ -1212,9 +1212,10 @@ export default class Calendar<T extends CalendarDataSourceElement> {
 	protected _getDate(elt): Date {
 		var day = elt.querySelector('.day-content').textContent;
 		var monthId = parseInt(elt.closest('.month-container').dataset.monthId);
-
-		return new Date(this._startDate.getFullYear(), this._startDate.getMonth() + monthId, day);
-	}
+		var jsDate = new Date(this._startDate.getFullYear(), this._startDate.getMonth() + monthId, day);
+		jsDate.setTime( jsDate.getTime() - jsDate.getTimezoneOffset()*60*1000 );
+		return jsDate;
+	} 
 
 	protected _triggerEvent(eventName: string, parameters: any) {
 		var event:any = null;
