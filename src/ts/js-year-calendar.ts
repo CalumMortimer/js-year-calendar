@@ -320,6 +320,7 @@ export default class Calendar<T extends CalendarDataSourceElement> {
      * Renders the calendar.
      */
 	public render(isLoading: boolean = false): void {
+		console.log(this);
 		// Clear the calendar (faster method)
 		while (this.element.firstChild) {
 			this.element.removeChild(this.element.firstChild);
