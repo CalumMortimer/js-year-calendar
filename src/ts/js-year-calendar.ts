@@ -981,6 +981,8 @@ export default class Calendar<T extends CalendarDataSourceElement> {
 		if (this.element.querySelector('.month') == null) {
 			return;
 		}
+    console.log(this.element.offsetWidth);
+		console.log(this.element);
 
 		var calendarSize = this.element.offsetWidth;
 		var monthSize = (this.element.querySelector('.month') as HTMLElement).offsetWidth + 10;
@@ -1001,6 +1003,8 @@ export default class Calendar<T extends CalendarDataSourceElement> {
 		else {
 			this._nbCols = 12;
 		}
+
+		console.log(this._nbCols);
 
 		this.element.querySelectorAll('.month-container').forEach(month => {
 			if (!month.classList.contains(`month-${this._nbCols}`)) {
