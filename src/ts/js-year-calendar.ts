@@ -486,6 +486,8 @@ export default class Calendar<T extends CalendarDataSourceElement> {
 			monthDiv.classList.add('month-container');
 			monthDiv.dataset.monthId = m.toString();
 
+			console.log(this._nbCols);
+
 			if (this._nbCols) {
 				monthDiv.classList.add(`month-${this._nbCols}`);
 			}
