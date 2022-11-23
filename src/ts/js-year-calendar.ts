@@ -986,6 +986,9 @@ export default class Calendar<T extends CalendarDataSourceElement> {
 		}
 		var calendarSize = this.element.offsetWidth;
 		var monthSize = (this.element.querySelector('.month') as HTMLElement).offsetWidth + 10;
+    console.log("month size", monthSize);
+		console.log("offset width", (this.element.querySelector('.month') as HTMLElement).offsetWidth);
+
 		this._nbCols = null;
 		
 		if (monthSize * 6 < calendarSize && this.options.numberMonthsDisplayed >= 6) {
