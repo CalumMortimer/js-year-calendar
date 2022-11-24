@@ -320,7 +320,6 @@ export default class Calendar<T extends CalendarDataSourceElement> {
      * Renders the calendar.
      */
 	public render(isLoading: boolean = false): void {
-		console.log(this);
 		// Clear the calendar (faster method)
 		while (this.element.firstChild) {
 			this.element.removeChild(this.element.firstChild);
@@ -485,8 +484,6 @@ export default class Calendar<T extends CalendarDataSourceElement> {
 			var monthDiv = document.createElement('div');
 			monthDiv.classList.add('month-container');
 			monthDiv.dataset.monthId = m.toString();
-
-			console.log(this._nbCols);
 
 			if (this._nbCols) {
 				monthDiv.classList.add(`month-${this._nbCols}`);
@@ -986,9 +983,6 @@ export default class Calendar<T extends CalendarDataSourceElement> {
 		}
 		var calendarSize = this.element.offsetWidth;
 		var monthSize = (this.element.querySelector('.month') as HTMLElement).offsetWidth + 10;
-    console.log("month size", monthSize);
-		console.log("offset width", (this.element.querySelector('.month') as HTMLElement).offsetWidth);
-		console.log("this element offset width:", this.element.offsetWidth);
 
 		this._nbCols = null;
 		
