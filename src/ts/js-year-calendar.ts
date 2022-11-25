@@ -1965,10 +1965,6 @@ export default class Calendar<T extends CalendarDataSourceElement> {
 	}
 }
 
-declare global {
-    interface Window { Calendar: any; }
-}
-
 if (typeof window === "object") {
 	window.Calendar = Calendar;
 
